@@ -3,13 +3,12 @@
 @{
     string appTitle = "Asp.Net Core";
 
-    Person person = new  Person ()
-    {
-         PersonName ="Ankul kumar",
-        DateOfBirth = Convert.ToDateTime("1998-03-08"),
-        PersonGender = Gender.Male
-
-    };
+  List<Person> persons = new List<Person>()
+  {
+      new Person{PersonName="John", DateOfBirth=new DateTime(1990,1,1), PersonGender=Gender.Male},
+      new Person{PersonName="Jane", DateOfBirth=new DateTime(1995,5,15), PersonGender=Gender.Female},
+      new Person{PersonName="Alex", DateOfBirth=new DateTime(1995,6,15), PersonGender=Gender.Trans}
+  };
 }
 @{
     
@@ -21,29 +20,16 @@
     
     </head>
     <body><h1> Welcome</h1>
-           <H2>Hello @person.PersonName</H2>   
-           @if(person.DateOfBirth.HasValue)
-           {
-               double age = Math.Round((DateTime.Now- person.DateOfBirth).Value.TotalDays / 365.25);
-               <h4>@age years old</h4>
-           }
-           else
-           {
-               <h3> Age cannot be null </h3>
-           }
-           @switch(person.PersonGender)
-           {
-        case Gender.Male:   <p>mens day</p>;
-                            break;
-          
-       case Gender.Female: <p>womens day</p>;
-                
-                                         break;
-        
+          @foreach(Person person in persons)
+          {
+              <div>
+                      @person.PersonName
+                      <span> , </span>
+                      <span> @person.PersonGender  </span>
 
-            case Gender.Trans: <p>others day</p>
-                                  break;
-           }
+                     <span>@person.DateOfBirth.Value.ToString("MM/dd/yyyy")</span>
+              </div>
+          }
     </body>
 </html>
 }
