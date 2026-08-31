@@ -1,0 +1,49 @@
+﻿@using ViewsExample.Models
+
+@{
+    string appTitle = "Asp.Net Core";
+
+    Person person = new  Person ()
+    {
+         PersonName ="Ankul kumar",
+        DateOfBirth = Convert.ToDateTime("1998-03-08"),
+        PersonGender = Gender.Male
+
+    };
+}
+@{
+    
+    <!Doctype =" <html xmlns="http://www.w3.org/1999/xhtml">
+    <html>
+    <head>
+        <title>@appTitle</title>
+        <meta charset="utf-8" />
+    
+    </head>
+    <body><h1> Welcome</h1>
+           <H2>Hello @person.PersonName</H2>   
+           @if(person.DateOfBirth.HasValue)
+           {
+               double age = Math.Round((DateTime.Now- person.DateOfBirth).Value.TotalDays / 365.25);
+               <h4>@age years old</h4>
+           }
+           else
+           {
+               <h3> Age cannot be null </h3>
+           }
+           @switch(person.PersonGender)
+           {
+        case Gender.Male:   <p>mens day</p>;
+                            break;
+          
+       case Gender.Female: <p>womens day</p>;
+                
+                                         break;
+        
+
+            case Gender.Trans: <p>others day</p>
+                                  break;
+           }
+    </body>
+</html>
+}
